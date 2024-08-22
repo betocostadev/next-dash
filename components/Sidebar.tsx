@@ -9,7 +9,6 @@ import {
 } from 'lucide-react'
 import {
   Command,
-  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -18,6 +17,8 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from '@/components/ui/command'
+
+// TODO: For Mobile Screens, import the CommandDialog and use it
 
 const Sidebar = () => {
   return (
