@@ -1,3 +1,4 @@
+'use client'
 import {
   Table,
   TableBody,
@@ -12,6 +13,7 @@ import Link from 'next/link'
 import posts from '@/data/postsData'
 import { Post } from '@/types/posts'
 import { PostsTableProps } from './props'
+import { usePathname } from 'next/navigation'
 
 const PostsTable = ({ limit, title }: PostsTableProps) => {
   // Sort in decending order based on date
@@ -19,13 +21,19 @@ const PostsTable = ({ limit, title }: PostsTableProps) => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
+  const pathName = usePathname()
+
   const filteredPosts = limit ? sortedPosts.slice(0, limit) : sortedPosts
 
   return (
     <div className="mt-10">
       <h3 className="text-2xl mb-4 font-semibold">{title ? title : 'Posts'}</h3>
       <Table>
-        <TableCaption>Latest posts</TableCaption>
+        {pathName !== '/posts' && (
+          <TableCaption>
+            <Link href="/posts">Latest posts</Link>
+          </TableCaption>
+        )}
         <TableHeader>
           <TableRow>
             <TableHead>Title</TableHead>
