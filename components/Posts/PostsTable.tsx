@@ -38,6 +38,7 @@ const PostsTable = ({ limit, title }: PostsTableProps) => {
           <TableRow>
             <TableHead>Title</TableHead>
             <TableHead className="hidden md:table-cell">Author</TableHead>
+            <TableHead className="hidden md:table-cell">Comments</TableHead>
             <TableHead className="hidden md:table-cell text-right">
               Date
             </TableHead>
@@ -50,6 +51,9 @@ const PostsTable = ({ limit, title }: PostsTableProps) => {
               <TableCell>{post.title}</TableCell>
               <TableCell className="hidden md:table-cell">
                 {post.author}
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
+                {post.comments.length}
               </TableCell>
               <TableCell className="hidden md:table-cell text-right">
                 {post.date}

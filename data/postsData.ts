@@ -14,6 +14,16 @@ const posts: Post[] = [
         text: 'Looking forward to more posts on this topic.',
         username: 'Alex',
       },
+      {
+        id: '3',
+        text: 'It was a very interesting topic, maybe you can give some more explation about GEN AI in your next post. Im looking forward to it!',
+        username: 'Jean Gray',
+      },
+      {
+        id: '4',
+        text: 'This field is so huge, Im still trying to figure it out.',
+        username: 'James Hunter',
+      },
     ],
   },
   {
@@ -164,6 +174,11 @@ const posts: Post[] = [
         id: '2',
         text: "I'm interested in reinforcement learning.",
         username: 'Daniel',
+      },
+      {
+        id: '3',
+        text: 'It was a very interesting topic, maybe you can give some more explation about Machine Learning applications!',
+        username: 'Jean Gray',
       },
     ],
   },
