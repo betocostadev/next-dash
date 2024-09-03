@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useToast } from '@/hooks/use-toast'
 import {
   Form,
   FormControl,
@@ -24,6 +25,8 @@ import {
 } from '../ui/card'
 
 const PostForm = ({ post }: { post?: Post }) => {
+  const { toast } = useToast()
+
   const formSchema = z.object({
     title: z
       .string()
@@ -51,8 +54,11 @@ const PostForm = ({ post }: { post?: Post }) => {
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     // const { title, body, author, date } = form.getValues()
-    console.log('Form data')
     console.log(data)
+    toast({
+      title: 'Post updated',
+      description: `${data.title} was updated!`,
+    })
   }
 
   const formClasses = (element: string) =>

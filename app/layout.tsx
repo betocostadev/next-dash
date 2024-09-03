@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { Toaster } from '@/components/ui/toaster'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           </aside>
           <div className="p-5 w-full md:max-w-[1200px]">{children}</div>
         </div>
+        <Toaster />
       </body>
     </html>
   )
