@@ -55,6 +55,11 @@ const PostForm = ({ post }: { post?: Post }) => {
     console.log(data)
   }
 
+  const formClasses = (element: string) =>
+    element === 'input'
+      ? 'bg-slate-50 border-1 focus-visible:ring-1 text-black focus-visible:ring-offset-2 dark:bg-slate-500 dark:text-white'
+      : 'uppercase text-xs font-bold text-zinc-500 dark:text-white'
+
   return (
     <Card>
       <CardHeader>
@@ -69,9 +74,13 @@ const PostForm = ({ post }: { post?: Post }) => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel className={formClasses('label')}>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="Post title" {...field} />
+                    <Input
+                      className={formClasses('input')}
+                      placeholder="Post title"
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>Add the title of this post.</FormDescription>
                   <FormMessage />
@@ -83,9 +92,13 @@ const PostForm = ({ post }: { post?: Post }) => {
               name="body"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Post</FormLabel>
+                  <FormLabel className={formClasses('label')}>Post</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="This post is about..." {...field} />
+                    <Textarea
+                      className={formClasses('input')}
+                      placeholder="This post is about..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>Write your post here</FormDescription>
                   <FormMessage />
@@ -97,9 +110,10 @@ const PostForm = ({ post }: { post?: Post }) => {
               name="author"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Author</FormLabel>
+                  <FormLabel className={formClasses('label')}>Author</FormLabel>
                   <FormControl>
                     <Input
+                      className={formClasses('input')}
                       placeholder="Post author"
                       disabled={post?.author ? true : false}
                       {...field}
@@ -118,9 +132,13 @@ const PostForm = ({ post }: { post?: Post }) => {
               name="date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date</FormLabel>
+                  <FormLabel className={formClasses('label')}>Date</FormLabel>
                   <FormControl>
-                    <Input placeholder="Publish date" {...field} />
+                    <Input
+                      className={formClasses('input')}
+                      placeholder="Publish date"
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription>
                     Add the date you want the post to be published, in case of
@@ -130,7 +148,14 @@ const PostForm = ({ post }: { post?: Post }) => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <div className="flex justify-center">
+              <Button
+                className="w-full dark:bg-slate-800 dark:text-white sm:w-1/2"
+                type="submit"
+              >
+                Update Post
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>
