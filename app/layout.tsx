@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
@@ -20,14 +21,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <div className="flex">
-          <aside className="hidden md:block h-[100vh] w-[320px]">
-            <Sidebar />
-          </aside>
-          <div className="p-5 w-full md:max-w-[1200px]">{children}</div>
-        </div>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          storageKey="dashboard-theme"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <div className="flex">
+            <aside className="hidden md:block h-[100vh] w-[320px]">
+              <Sidebar />
+            </aside>
+            <div className="p-5 w-full md:max-w-[1200px]">{children}</div>
+          </div>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )
