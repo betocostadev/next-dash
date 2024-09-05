@@ -38,7 +38,9 @@ const Navbar = () => {
             <DropdownMenuItem>Billing</DropdownMenuItem>
             <DropdownMenuItem>Team</DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/auth">Logout</Link>
+              <Link href="/auth" replace>
+                Logout
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
