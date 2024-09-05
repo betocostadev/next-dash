@@ -23,6 +23,7 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
+import { formClasses } from '@/lib/styler'
 
 const PostForm = ({ post }: { post?: Post }) => {
   const { toast } = useToast()
@@ -60,11 +61,6 @@ const PostForm = ({ post }: { post?: Post }) => {
       description: `${data.title} was updated!`,
     })
   }
-
-  const formClasses = (element: string) =>
-    element === 'input'
-      ? 'bg-slate-50 border-1 focus-visible:ring-1 text-black focus-visible:ring-offset-2 dark:bg-slate-500 dark:text-white'
-      : 'uppercase text-xs font-bold text-zinc-500 dark:text-white'
 
   return (
     <Card>
