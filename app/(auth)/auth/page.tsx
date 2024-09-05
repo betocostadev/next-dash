@@ -1,9 +1,7 @@
+import AuthTabs from '@/components/Auth/AuthTabs'
+
 const AuthPage = () => {
-  return (
-    <div>
-      <p>Auth</p>
-    </div>
-  )
+  return <AuthTabs />
 }
 
 export default AuthPage
