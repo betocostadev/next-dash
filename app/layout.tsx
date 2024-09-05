@@ -28,13 +28,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <div className="flex">
-            <aside className="hidden md:block h-[100vh] w-[320px]">
-              <Sidebar />
-            </aside>
-            <div className="p-5 w-full md:max-w-[1200px]">{children}</div>
-          </div>
+          {children}
           <Toaster />
         </ThemeProvider>
       </body>
