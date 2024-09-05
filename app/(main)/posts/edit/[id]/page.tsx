@@ -19,7 +19,7 @@ const PostEditPage = ({ params }: PostEditPageProps) => {
     }
 
     setPostFetched(true)
-  }, [])
+  }, [params.id])
 
   return (
     <div>

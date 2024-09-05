@@ -156,7 +156,7 @@ const PostForm = ({ post }: { post?: Post }) => {
             />
             <div className="flex justify-center">
               <Button
-                className="w-full dark:bg-slate-800 dark:text-white sm:w-1/2"
+                className="w-full dark:bg-indigo-600 dark:text-white sm:w-1/2"
                 type="submit"
               >
                 Update Post
