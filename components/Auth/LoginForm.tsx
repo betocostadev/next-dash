@@ -24,14 +24,20 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
-import { formClasses } from '@/lib/styler'
+// import { formClasses } from '@/lib/styler'
 
 const LoginForm = () => {
   const { toast } = useToast()
   const router = useRouter()
+  // console.log('received: ', formClasses('label'))
+
+  const formClasses = (element: string): string =>
+    element === 'input'
+      ? 'bg-slate-50 border-1 focus-visible:ring-1 text-black focus-visible:ring-offset-2 dark:bg-slate-500 dark:text-white'
+      : 'uppercase text-xs font-bold text-zinc-500 dark:text-white'
 
   const formSchema = z.object({
-    username: z.string().min(1, {
+    email: z.string().min(1, {
       message: 'Username or email is required.',
     }),
     password: z.string().min(1, {
@@ -42,7 +48,7 @@ const LoginForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   })
@@ -52,7 +58,7 @@ const LoginForm = () => {
     console.log(data)
     toast({
       title: 'You are now logged in',
-      description: `Welcome back ${data.username}`,
+      description: `Welcome back ${data.email}`,
     })
     router.replace('/')
   }
@@ -71,23 +77,20 @@ const LoginForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name="username"
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={formClasses('label')}>
-                    Username
-                  </FormLabel>
+                  <FormLabel className={formClasses('label')}>Email</FormLabel>
                   <FormControl>
                     <Input
                       autoFocus
+                      type="email"
                       className={formClasses('input')}
                       placeholder="me@email.com"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
-                    Enter your username or email.
-                  </FormDescription>
+                  <FormDescription>Enter your Email.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -102,6 +105,7 @@ const LoginForm = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      type="password"
                       className={formClasses('input')}
                       placeholder="MyPassword"
                       {...field}
