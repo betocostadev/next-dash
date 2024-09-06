@@ -23,9 +23,11 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
+import { useRouter } from 'next/navigation'
 
 const PostForm = ({ post }: { post?: Post }) => {
   const { toast } = useToast()
+  const router = useRouter()
 
   const formClasses = (element: string): string =>
     element === 'input'
@@ -64,6 +66,7 @@ const PostForm = ({ post }: { post?: Post }) => {
       title: 'Post updated',
       description: `${data.title} was updated!`,
     })
+    router.push('/posts')
   }
 
   return (

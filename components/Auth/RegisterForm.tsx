@@ -34,21 +34,34 @@ const RegisterForm = () => {
       ? 'bg-slate-50 border-1 focus-visible:ring-1 text-black focus-visible:ring-offset-2 dark:bg-slate-500 dark:text-white'
       : 'uppercase text-xs font-bold text-zinc-500 dark:text-white'
 
-  const formSchema = z.object({
-    username: z.string().min(1, {
-      message: 'Username or email is required.',
-    }),
-    password: z.string().min(1, {
-      message: 'Password is required.',
-    }),
-    passwordConfirmation: z.string(),
-  })
+  const formSchema = z
+    .object({
+      name: z.string().min(3, {
+        message: 'Name is required.',
+      }),
+      email: z
+        .string()
+        .min(3, {
+          message: 'Email is required.',
+        })
+        .email({ message: 'Please input a valid e-mail.' }),
+      password: z.string().min(5, {
+        message: 'A password with a minimmun 5 characters is required.',
+      }),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Passwords don't match",
+      path: ['passwordConfirm'], // path of error
+    })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: '',
+      name: '',
+      email: '',
       password: '',
+      confirmPassword: '',
     },
   })
 
@@ -56,8 +69,8 @@ const RegisterForm = () => {
     // const { username, password } = form.getValues()
     console.log(data)
     toast({
-      title: 'You are now logged in',
-      description: `Welcome back ${data.username}`,
+      title: 'Your account was created!',
+      description: `Welcome ${data.name}`,
     })
     router.replace('/')
   }
@@ -65,10 +78,9 @@ const RegisterForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Login</CardTitle>
+        <CardTitle>Sign Up</CardTitle>
         <CardDescription>
-          Welcome to Next Admin. Use your credentials below to access your
-          account.
+          Welcome, create your account to use Next Admin!
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -76,12 +88,28 @@ const RegisterForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={formClasses('label')}>
-                    Username
-                  </FormLabel>
+                  <FormLabel className={formClasses('label')}>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoFocus
+                      className={formClasses('input')}
+                      placeholder="My name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={formClasses('label')}>Email</FormLabel>
                   <FormControl>
                     <Input
                       autoFocus
@@ -90,9 +118,6 @@ const RegisterForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
-                    Enter your username or email.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -108,10 +133,32 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       className={formClasses('input')}
-                      placeholder="MyPassword"
+                      placeholder="MyNewPassword"
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className={formClasses('label')}>
+                    Confirm password
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className={formClasses('input')}
+                      placeholder="MyNewPasswordAgain"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Must be the same as your password
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -121,7 +168,7 @@ const RegisterForm = () => {
                 className="w-full dark:bg-indigo-600 dark:text-white sm:w-1/2"
                 type="submit"
               >
-                Login
+                Sign Up
               </Button>
             </div>
           </form>

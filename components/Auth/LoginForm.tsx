@@ -120,7 +120,7 @@ const LoginForm = () => {
                 className="w-full dark:bg-indigo-600 dark:text-white sm:w-1/2"
                 type="submit"
               >
-                Login
+                Sign In
               </Button>
             </div>
           </form>
